@@ -79,7 +79,7 @@ KeyIdentifier [
 ]
 ```
 
-## Step 3
+### Step 3
 
 Extract the certificate from the keystore tcp_keystore (step 3) and add it to the truststore (step 4)
 
@@ -116,7 +116,7 @@ nPPTt8UgNRJ6FyrPsX6PIXD7BI7rWYKrTDiVZwYbJjuKpy4=
 -----END CERTIFICATE-----
 ```
 
-## Step 4
+### Step 4
 
 Import the public cert into the truststore.
 
