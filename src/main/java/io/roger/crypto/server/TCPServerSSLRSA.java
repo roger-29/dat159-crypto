@@ -32,7 +32,6 @@ public class TCPServerSSLRSA {
 	}
 
 	private void createSSLServerSocket() {
-
 		try {
 			ServerSocketFactory ssf = SSLServerSocketFactory.getDefault();
 			ssocket = ssf.createServerSocket(port);
@@ -41,7 +40,8 @@ public class TCPServerSSLRSA {
 		}
 	}
 
-	public void socketlistener() throws NoSuchAlgorithmException, NoSuchPaddingException {
+	public void socketlistener()
+			throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, SignatureException {
 
 		try {
 
@@ -77,35 +77,34 @@ public class TCPServerSSLRSA {
 		}
 	}
 
-	private boolean checkMessageForValidity(String messageandsignature, PublicKey publickey) {
+	private boolean checkMessageForValidity(String messageandsignature, PublicKey publickey)
+			throws InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException, SignatureException {
 
 		if (messageandsignature.startsWith("GET /")) {
 			messageandsignature = messageandsignature.replace("GET /", "");
 			messageandsignature = messageandsignature.replace("HTTP/1.1", "");
 		}
 
-		boolean isValid = false;
-
 		String[] tokens = messageandsignature.trim().split("-");
 		String message = tokens[0].replace("%20", " ");
 		String signatureinhex = tokens[1];
 
-		// implement me - verify signature and send the result
+		byte[] digitalSignature = DigitalSignature.getEncodedBinary(signatureinhex);
 
-		return isValid;
+		return DigitalSignature.verify(message, digitalSignature, publickey, DigitalSignature.SIGNATURE_SHA256WithRSA);
 	}
 
 	private PublicKey getPublicKey() throws NoSuchAlgorithmException, NoSuchPaddingException {
 
-		String certpath = "specify certificate path here"; // extract public key from the certificate file
+		String certpath = "keys/tcpexample.cer"; // extract public key from the certificate file
 
 		return Certificates.getPublicKey(certpath);
 	}
 
-	public static void main(String[] args) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException {
+	public static void main(String[] args) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException,
+			InvalidKeyException, SignatureException {
 		// set the keystore dynamically using the system property
 
-		// implement me
 		System.setProperty("javax.net.ssl.keyStore", "keys/tcp_keystore");
 		System.setProperty("javax.net.ssl.keyStorePassword", "abcdef");
 

@@ -1,5 +1,12 @@
 package io.roger.crypto.cryptography;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+
 import java.security.PublicKey;
 
 /**
@@ -15,8 +22,17 @@ public class Certificates {
 	 * @return
 	 */
 	public static PublicKey getPublicKey(String certfile) {
-		// implement me
+		X509Certificate certificate = null;
 
-		return null;
+		try {
+			FileInputStream fin = new FileInputStream(certfile);
+			CertificateFactory f = CertificateFactory.getInstance("X.509");
+			certificate = (X509Certificate) f.generateCertificate(fin);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (CertificateException e) {
+			e.printStackTrace();
+		}
+		return certificate.getPublicKey();
 	}
 }
