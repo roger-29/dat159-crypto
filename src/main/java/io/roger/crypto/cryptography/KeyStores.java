@@ -12,7 +12,8 @@ public class KeyStores {
 	 * @return
 	 */
 	public static PrivateKey getPrivateKeyFromKeyStore(String keystore, String alias, String keystorepassword) {
-		// Load the keystore (programmatically) and extract the private key from the keystore
+		// Load the keystore (programmatically) and extract the private key from the
+		// keystore
 
 		// implement me
 

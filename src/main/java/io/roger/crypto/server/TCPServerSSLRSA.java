@@ -1,4 +1,4 @@
-package  io.roger.crypto.server;
+package io.roger.crypto.server;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -18,9 +18,8 @@ import javax.net.ServerSocketFactory;
 import javax.net.ssl.SSLServerSocketFactory;
 
 import io.roger.crypto.config.ServerConfig;
-import io.roger.crypto.crypto.Certificates;
-import io.roger.crypto.crypto.DigitalSignature;
-
+import io.roger.crypto.cryptography.Certificates;
+import io.roger.crypto.cryptography.DigitalSignature;
 
 public class TCPServerSSLRSA {
 
@@ -53,17 +52,17 @@ public class TCPServerSSLRSA {
 			DataOutputStream outmsg = new DataOutputStream(socket.getOutputStream());
 
 			String clientmsg = inmsg.readLine();
-			System.out.println("Message recieved from the Client: "+clientmsg);
+			System.out.println("Message recieved from the Client: " + clientmsg);
 
 			boolean valid = checkMessageForValidity(clientmsg, getPublicKey());
 
 			String feedback = " ";
-			if(valid)
+			if (valid)
 				feedback = "message is valid";
 			else
 				feedback = "message is invalid - Signatures did not match";
 
-			String response = "HTTP/1.1 200 OK \r\n\r\n"+ feedback;
+			String response = "HTTP/1.1 200 OK \r\n\r\n" + feedback;
 
 			outmsg.write(response.getBytes());
 			outmsg.flush();
@@ -72,7 +71,7 @@ public class TCPServerSSLRSA {
 
 			socket.close();
 
-		}catch(IOException e) {
+		} catch (IOException e) {
 
 			e.printStackTrace();
 		}
@@ -80,7 +79,7 @@ public class TCPServerSSLRSA {
 
 	private boolean checkMessageForValidity(String messageandsignature, PublicKey publickey) {
 
-		if(messageandsignature.startsWith("GET /")) {
+		if (messageandsignature.startsWith("GET /")) {
 			messageandsignature = messageandsignature.replace("GET /", "");
 			messageandsignature = messageandsignature.replace("HTTP/1.1", "");
 		}
@@ -98,7 +97,7 @@ public class TCPServerSSLRSA {
 
 	private PublicKey getPublicKey() throws NoSuchAlgorithmException, NoSuchPaddingException {
 
-		String certpath = "specify certificate path here";		// extract public key from the certificate file
+		String certpath = "specify certificate path here"; // extract public key from the certificate file
 
 		return Certificates.getPublicKey(certpath);
 	}
@@ -111,10 +110,8 @@ public class TCPServerSSLRSA {
 		TCPServerSSLRSA tcpserver = new TCPServerSSLRSA(ServerConfig.PORT);
 
 		// start the server and let it run forever
-		while(true) {
+		while (true) {
 			tcpserver.socketlistener();
 		}
-
 	}
-
 }

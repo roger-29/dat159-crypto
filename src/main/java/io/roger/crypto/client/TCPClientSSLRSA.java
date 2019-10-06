@@ -28,7 +28,8 @@ public class TCPClientSSLRSA {
 		this.port = port;
 	}
 
-	public void clientProcess(String msg) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, NoSuchPaddingException {
+	public void clientProcess(String msg)
+			throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, NoSuchPaddingException {
 
 		try {
 
@@ -38,26 +39,26 @@ public class TCPClientSSLRSA {
 			PrintWriter outmsg = new PrintWriter(csocket.getOutputStream(), true);
 			BufferedReader inmsg = new BufferedReader(new InputStreamReader(csocket.getInputStream()));
 
-			System.out.println("Message to TCPServer: "+msg);
+			System.out.println("Message to TCPServer: " + msg);
 
 			// sign the message and append the signature to the message to the server
 
 			// implement me
 			String signatureinhex = "";
 
-			msg = msg + "-"+signatureinhex;			// format message as: Message-Signature
+			msg = msg + "-" + signatureinhex; // format message as: Message-Signature
 
 			// send msg + sign to the server
 			outmsg.println(msg);
 
-			//read the response from the server
+			// read the response from the server
 			StringBuffer sb = new StringBuffer();
 			String line = "";
-			while((line = inmsg.readLine())!=null) {
-				sb.append(line+"\n");
+			while ((line = inmsg.readLine()) != null) {
+				sb.append(line + "\n");
 			}
 
-			System.out.println("Response from Server: "+sb);
+			System.out.println("Response from Server: " + sb);
 
 			outmsg.close();
 			inmsg.close();
@@ -77,8 +78,8 @@ public class TCPClientSSLRSA {
 		return privatekey;
 	}
 
-
-	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, NoSuchPaddingException {
+	public static void main(String[] args)
+			throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, NoSuchPaddingException {
 		// set the truststore dynamically using the system property
 
 		// implement me

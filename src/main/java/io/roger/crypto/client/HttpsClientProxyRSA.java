@@ -30,7 +30,8 @@ public class HttpsClientProxyRSA {
 		this.port = port;
 	}
 
-	public void doClient(String message) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, NoSuchPaddingException {
+	public void doClient(String message)
+			throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, NoSuchPaddingException {
 
 		URL url;
 
@@ -44,9 +45,9 @@ public class HttpsClientProxyRSA {
 			// implement me
 			String signatureinhex = "";
 
-			message = message + "-"+signatureinhex;			// format message as: Message-Signature
+			message = message + "-" + signatureinhex; // format message as: Message-Signature
 
-			url = new URL("https://"+server+":"+port+"/"+message);
+			url = new URL("https://" + server + ":" + port + "/" + message);
 
 			HttpsURLConnection con = (HttpsURLConnection) url.openConnection(proxy);
 
@@ -54,8 +55,8 @@ public class HttpsClientProxyRSA {
 
 			StringBuffer sb = new StringBuffer();
 			String line = "";
-			while((line = br.readLine())!=null) {
-				sb.append(line+"\n");
+			while ((line = br.readLine()) != null) {
+				sb.append(line + "\n");
 			}
 
 			System.out.println(sb);
@@ -76,11 +77,13 @@ public class HttpsClientProxyRSA {
 		return privatekey;
 	}
 
-	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, NoSuchPaddingException {
+	public static void main(String[] args)
+			throws InvalidKeyException, NoSuchAlgorithmException, SignatureException, NoSuchPaddingException {
 
 		// set the truststores dynamically using the system property
 
-		// implement me - You need to also add the zap truststore in order for your to route ssl traffic via zap
+		// implement me - You need to also add the zap truststore in order for your to
+		// route ssl traffic via zap
 
 		String message = "Message from HTTPS client";
 		HttpsClientProxyRSA c = new HttpsClientProxyRSA(ServerConfig.SERVER, ServerConfig.PORT);
