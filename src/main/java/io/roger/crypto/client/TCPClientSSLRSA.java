@@ -84,6 +84,9 @@ public class TCPClientSSLRSA {
 
 		// implement me
 
+		System.setProperty("javax.net.ssl.trustStore", "keys/tcp_truststore");
+		System.setProperty("javax.net.ssl.trustStorePassword", "abcdef");
+
 		String message = "Message from TCP SSLClient";
 		TCPClientSSLRSA c = new TCPClientSSLRSA(ServerConfig.SERVER, ServerConfig.PORT);
 		c.clientProcess(message);

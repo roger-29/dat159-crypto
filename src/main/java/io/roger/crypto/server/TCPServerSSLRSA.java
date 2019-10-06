@@ -106,6 +106,8 @@ public class TCPServerSSLRSA {
 		// set the keystore dynamically using the system property
 
 		// implement me
+		System.setProperty("javax.net.ssl.keyStore", "keys/tcp_keystore");
+		System.setProperty("javax.net.ssl.keyStorePassword", "abcdef");
 
 		TCPServerSSLRSA tcpserver = new TCPServerSSLRSA(ServerConfig.PORT);
 
