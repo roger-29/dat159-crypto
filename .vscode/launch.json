@@ -6,6 +6,20 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "CodeLens (Launch) - TCPServerSSLRSA",
+			"request": "launch",
+			"mainClass": "io.roger.crypto.server.TCPServerSSLRSA",
+			"projectName": "dat159-crypto"
+		},
+		{
+			"type": "java",
+			"name": "CodeLens (Launch) - TCPClientSSLRSA",
+			"request": "launch",
+			"mainClass": "io.roger.crypto.client.TCPClientSSLRSA",
+			"projectName": "dat159-crypto"
+		},
+		{
+			"type": "java",
 			"name": "Debug (Launch) - Current File",
 			"request": "launch",
 			"mainClass": "${file}"
