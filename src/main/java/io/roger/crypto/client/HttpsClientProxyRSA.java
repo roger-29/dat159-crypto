@@ -81,7 +81,7 @@ public class HttpsClientProxyRSA {
 
 		// implement me - You need to also add the zap truststore in order for your to
 		// route ssl traffic via zap
-		System.setProperty("javax.net.ssl.trustStore", "keys/tcp_truststore");
+		System.setProperty("javax.net.ssl.trustStore", "keys/owasp_truststore");
 		System.setProperty("javax.net.ssl.trustStorePassword", "abcdef");
 
 		String message = "Message from HTTPS client";

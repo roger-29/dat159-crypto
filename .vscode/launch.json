@@ -6,6 +6,13 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "CodeLens (Launch) - HttpsClientProxyRSA",
+			"request": "launch",
+			"mainClass": "io.roger.crypto.client.HttpsClientProxyRSA",
+			"projectName": "dat159-crypto"
+		},
+		{
+			"type": "java",
 			"name": "CodeLens (Launch) - TCPServerSSLRSA",
 			"request": "launch",
 			"mainClass": "io.roger.crypto.server.TCPServerSSLRSA",
