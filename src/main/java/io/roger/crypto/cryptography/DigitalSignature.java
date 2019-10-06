@@ -1,13 +1,7 @@
 package io.roger.crypto.cryptography;
 
 import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.Signature;
-import java.security.SignatureException;
-
+import java.security.*;
 import javax.xml.bind.DatatypeConverter;
 
 public class DigitalSignature {

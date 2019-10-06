@@ -1,20 +1,8 @@
 package io.roger.crypto.client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.SocketAddress;
-import java.net.URL;
-
-import java.security.KeyStoreException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.SignatureException;
-import java.security.UnrecoverableKeyException;
+import java.io.*;
+import java.net.*;
+import java.security.*;
 
 import javax.crypto.NoSuchPaddingException;
 import javax.net.ssl.HttpsURLConnection;
@@ -38,8 +26,6 @@ public class HttpsClientProxyRSA {
 	public void doClient(String message) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException,
 			NoSuchPaddingException, UnrecoverableKeyException, KeyStoreException {
 
-		URL url;
-
 		SocketAddress addr = new InetSocketAddress(ProxyConfig.SERVER, ProxyConfig.PORT);
 		Proxy proxy = new Proxy(Proxy.Type.HTTP, addr);
 
@@ -52,12 +38,11 @@ public class HttpsClientProxyRSA {
 			PrivateKey privateKey = getPrivateKey();
 
 			byte[] signature = DigitalSignature.sign(message, privateKey, algorithm);
-
 			String signatureinhex = DigitalSignature.getHexValue(signature);
 
 			message = message + "-" + signatureinhex; // format message as: Message-Signature
 
-			url = new URL("https://" + server + ":" + port + "/" + message);
+			URL url = new URL("https://" + server + ":" + port + "/" + message);
 
 			HttpsURLConnection con = (HttpsURLConnection) url.openConnection(proxy);
 
@@ -65,6 +50,7 @@ public class HttpsClientProxyRSA {
 
 			StringBuffer sb = new StringBuffer();
 			String line = "";
+
 			while ((line = br.readLine()) != null) {
 				sb.append(line + "\n");
 			}
@@ -72,7 +58,6 @@ public class HttpsClientProxyRSA {
 			System.out.println(sb);
 
 			con.disconnect();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,7 +72,6 @@ public class HttpsClientProxyRSA {
 		String password = "abcdef";
 
 		return KeyStores.getPrivateKeyFromKeyStore(keystore, alias, password);
-
 	}
 
 	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException, SignatureException,
