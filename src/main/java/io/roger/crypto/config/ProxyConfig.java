@@ -6,5 +6,5 @@ package io.roger.crypto.config;
  */
 public class ProxyConfig {
 	public static final String SERVER = "localhost";
-	public static final int PORT = 9082;
+	public static final int PORT = 8080;
 }

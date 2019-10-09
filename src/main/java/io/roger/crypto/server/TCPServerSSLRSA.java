@@ -49,9 +49,9 @@ public class TCPServerSSLRSA {
 
 			String feedback = " ";
 			if (valid)
-				feedback = "message is valid";
+				feedback = "signature valid";
 			else
-				feedback = "message is invalid - Signatures did not match";
+				feedback = "signature invalid";
 
 			String response = "HTTP/1.1 200 OK \r\n\r\n" + feedback;
 

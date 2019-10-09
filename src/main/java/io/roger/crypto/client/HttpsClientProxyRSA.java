@@ -66,7 +66,7 @@ public class HttpsClientProxyRSA {
 	private PrivateKey getPrivateKey()
 			throws NoSuchAlgorithmException, NoSuchPaddingException, UnrecoverableKeyException, KeyStoreException {
 
-		String keystore = "mykeys/tcp_keystore";
+		String keystore = "keys/tcp_keystore";
 
 		String alias = "tcpexample";
 		String password = "abcdef";
