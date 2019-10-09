@@ -4,14 +4,31 @@
 
 By Sondre Gjellestad and Arne Molland
 
-## Task 1 | Keystores and Truststores
+## Task 1
 
-## Task 2 | Extract Public/Private Keys Programmatically
+After setting up the certificate, the connection works.
 
-## Task 3 | Sign and Verify Messages Using the Public and Private Keys
+![Console](images/task1.png)
+![Code](images/task1code.png)
+![Wireshark](images/task1wireshark.png)
+
+## Task 3
 
 Here is the result in WireShark.
 
-![Image](images/task3.png)
+![Console](images/task3.png)
+![Wireshark](images/task3wireshark.png)
 
 ## Task 4 | Tamper with the Message (Integrity)
+
+After setting up the proxy certificates, we've set a breakpoint like this:
+
+![ZAP](images/task4breakpoint.png)
+
+After tampering with the message this is the result.
+
+![Tampered](images/task4tampered.png)
+
+## Question
+
+Can we impersonate HttpsClientProxySSLRSA in this setup? If so, we would need it's private key in order to sign messages correctly.
