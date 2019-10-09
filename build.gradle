@@ -33,5 +33,5 @@ dependencies {
 
 application {
     // Define the main class for the application
-    mainClassName = 'io.roger.crypto.server.TCPServerSSLRSA'
+    mainClassName = 'io.roger.crypto.client.HttpsClientProxyRSA'
 }
