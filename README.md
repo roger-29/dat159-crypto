@@ -25,7 +25,7 @@ After setting up the proxy certificates, we've set a breakpoint like this:
 
 ![ZAP](images/task4breakpoint.png)
 
-After tampering with the message this is the result.
+After tampering with the message this is the response from the server.
 
 ![Tampered](images/task4tampered.png)
 
